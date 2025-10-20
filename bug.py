@@ -42,7 +42,7 @@ try:
 
     #check is s2_state changed
     if s2_state != s2Previous:
-      bug.isWrapOn = not bug.isWarpOn #flip between true and false
+      bug.isWrapOn = not bug.isWrapOn #flip between true and false
       print(f"Wrap mode: {bug.isWrapOn}")
     s2Previous = s2_state
 
