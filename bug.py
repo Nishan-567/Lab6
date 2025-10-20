@@ -12,7 +12,7 @@ from shifter import Shifter
 shifter = Shifter(serialPin, latchPin, clockPin)
 
 #3 GPIO pins
-s1,s2,s3 = 2,3,4
+s1,s2,s3 = 17,27,22
 
 GPIO.setup(s1, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(s2, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
@@ -47,7 +47,7 @@ try:
     s2Previous = s2_state
 
     #check s3 and increase speed
-    if s3_state:
+    if s3_state == GPIO.HIGH:
       bug.timeStep = .1/3
     else:
       bug.timeStep = .1
