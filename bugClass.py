@@ -18,39 +18,30 @@ class Bug:
 		self.x = x
 		self.isWrapOn = isWrapOn
 		
-		self.isRunning = False
 
 	def start(self):
 		#start LED motion
-		self.isRunning = True
-		try:
-			while self.isRunning:
-				pattern = 1 << self.x
-				self.shifter.shiftByte(pattern) #light x LED
-				time.sleep(self.timeStep) # sleep for timeStep
+		pattern = 1 << self.x
+		self.shifter.shiftByte(pattern) #light x LED
+		time.sleep(self.timeStep) # sleep for timeStep
 				
-				#move left or right
-				step = random.choice([-1, 1])
-				self.x += step
+		#move left or right
+		step = random.choice([-1, 1])
+		self.x += step
 				
-				#check for wrapping
-				if self.isWrapOn:
-					#wrap 0 to 7 and 7 to 0
-					self.x %= 8
-				else:
-					if self.x < 0:
-						self.x = 0
-					elif self.x > 7:
-						self.x =7
-		except KeyboardInterrupt:
-			pass
-		finally:
-			self.stop()
+		#check for wrapping
+		if self.isWrapOn:
+			#wrap 0 to 7 and 7 to 0
+			self.x %= 8
+		else:
+			if self.x < 0:
+				self.x = 0
+			elif self.x > 7:
+				self.x =7
 			
 	def stop(self):
-		self.isRunning = False
 		self.shifter.shiftByte(0) # turn off led
-		GPIO.cleanup()
+
 
 
 
